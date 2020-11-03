@@ -8,8 +8,8 @@ const Title = styled.h1`
   font-size: 50px;
 `
 
-export default function Home() {
-  // return <SiteWrapper><Page.Content title="Home"></Page.Content></SiteWrapper>
-  return <Page.Content title="Home"></Page.Content>
+export default function Login() {
+  // return <SiteWrapper><Page.Content title="Login"></Page.Content></SiteWrapper>
+  return <Page.Content title="login"></Page.Content>
 
 }

@@ -1,6 +1,8 @@
 import "tabler-react/dist/Tabler.css";
-import { Fragment } from "react"
+import React, { Fragment } from "react"
 import { Card, Button, Page, Site, Nav, Grid, List } from "tabler-react";
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
+import { useRouter } from 'next/router'
 
 type subNavItem = {
   value: string,
@@ -22,31 +24,41 @@ type navItem = {
 
 const navBarItems: Array<navItem> = [
   {
-    value: "Home",
+    value: "HOME",
     to: "/",
     icon: "home",
     // LinkComponent: withRouter(NavLink),
-    active: true,
+    // active: true,
     useExact: true,
   },
   {
-    value: "Products",
+    value: "PRODUCTS",
     to: "/products",
     icon: "box",
     // LinkComponent: withRouter(NavLink),
+    active: true,
     useExact: true,
   }
 
   
 ];
 
-export default function Home(props) {
+interface Props {
+  title?: string
+}
+
+const Layout: React.FC<Props> = ({ children }) => {
+
+  const { pathname, asPath } = useRouter()
+
+  console.log(pathname.split('/')[1])
+  console.log(asPath)
 
     return (
       <Site.Wrapper
         headerProps={{
           href: "/",
-          // imageURL:"../public/fishofish-logo.png",
+          // imageURL: "https://imagescater.blob.core.windows.net/caterimage/fish-bowl.png",
           navItems: (
             <Nav.Item type="div" className="d-none d-md-flex">
               <Button
@@ -64,7 +76,13 @@ export default function Home(props) {
 
         }}
         navProps={{ itemsObjects: navBarItems }}
-      >{props.children}</Site.Wrapper>
+      >
+        <>
+          {children}
+        </>
+      </Site.Wrapper>
     );
 
 }
+
+export default Layout
