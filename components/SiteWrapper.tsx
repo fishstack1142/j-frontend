@@ -1,5 +1,5 @@
 import "tabler-react/dist/Tabler.css";
-import React, { Fragment } from "react"
+import React, { Fragment, useState } from "react"
 import { Card, Button, Page, Site, Nav, Grid, List } from "tabler-react";
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { useRouter } from 'next/router'
@@ -22,37 +22,35 @@ type navItem = {
   useExact?: boolean,
 };
 
-const navBarItems: Array<navItem> = [
-  {
-    value: "HOME",
-    to: "/",
-    icon: "home",
-    // LinkComponent: withRouter(NavLink),
-    // active: true,
-    useExact: true,
-  },
-  {
-    value: "PRODUCTS",
-    to: "/products",
-    icon: "box",
-    // LinkComponent: withRouter(NavLink),
-    active: true,
-    useExact: true,
-  }
-
+const setNavBarItems = (home: boolean, products: boolean): Array<navItem> => {
   
-];
+  return [
+    {
+      value: "HOME",
+      to: "/",
+      icon: "home",
+      // LinkComponent: withRouter(NavLink),
+      active: home,
+      useExact: true,
+    },
+    {
+      value: "PRODUCTS",
+      to: "/products",
+      icon: "box",
+      // LinkComponent: withRouter(NavLink),
+      active: products,
+      useExact: true,
+    }
+  ];
+}
+
+
 
 interface Props {
   title?: string
 }
 
-const Layout: React.FC<Props> = ({ children }) => {
-
-  const { pathname, asPath } = useRouter()
-
-  console.log(pathname.split('/')[1])
-  console.log(asPath)
+const Layout: React.FC<Props> = (props: { products,home, children}) => {
 
     return (
       <Site.Wrapper
@@ -75,10 +73,10 @@ const Layout: React.FC<Props> = ({ children }) => {
           ),
 
         }}
-        navProps={{ itemsObjects: navBarItems }}
+        navProps={{ itemsObjects: setNavBarItems(props.home, props.products) }}
       >
         <>
-          {children}
+          {props.children}
         </>
       </Site.Wrapper>
     );
