@@ -1,15 +1,44 @@
-import styled from 'styled-components'
+import { Page, Form, Grid, Button, Card, Nav } from "tabler-react";
 
-import SiteWrapper from '../components/SiteWrapper'
-import { Page } from "tabler-react";
-
-const Title = styled.h1`
-  color: red;
-  font-size: 50px;
-`
-
-export default function Login() {
-  // return <SiteWrapper><Page.Content title="Login"></Page.Content></SiteWrapper>
-  return <Page.Content title="login"></Page.Content>
-
+export default function Home() {
+  return (
+    <>
+      <Grid.Row>
+        <Grid.Col width={1}></Grid.Col>
+        <Nav>
+          <Nav.Item to="/">HOME</Nav.Item>
+        </Nav>
+      </Grid.Row>
+      <Page.Content>
+        <Grid.Row>
+          <Grid.Col width={3}></Grid.Col>
+          <Grid.Col width={6}>
+            <Card title="LOGIN">
+              <Card.Body>
+                <Form.FieldSet>
+                  <Form.Group isRequired label="Email">
+                    <Form.Input name="email" />
+                  </Form.Group>
+                  <Form.Group isRequired label="Password">
+                    <Form.Input type="password" name="password" />
+                  </Form.Group>
+                </Form.FieldSet>
+              </Card.Body>
+              <Card.Footer>
+                <Button.List className="mt-4" align="center">
+                  <Button block color="primary">
+                    LOGIN
+                  </Button>
+                  <Button block color="secondary">
+                    SIGN UP INSTEAD
+                  </Button>
+                </Button.List>
+              </Card.Footer>
+            </Card>
+          </Grid.Col>
+          <Grid.Col width={3}></Grid.Col>
+        </Grid.Row>
+      </Page.Content>
+    </>
+  );
 }
